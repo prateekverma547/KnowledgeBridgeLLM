@@ -4,7 +4,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from langchain import PromptTemplate
 from langchain.chains import RetrievalQA
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
 
@@ -15,17 +15,27 @@ load_dotenv(dotenv_path)
 
 OPENAI_KEY = os.environ.get('OPENAI_API_KEY')
 
+class Singleton(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
 
-class QueryEngine:
-    def __init__(self):
-        self.index = IndexBuilder()
-        self.chroma_client = self.index.create_embeddings()
-        self.embedding_function = OpenAIEmbeddings(model="text-embedding-ada-002")
-        self.chroma_db = Chroma(
-            client=self.chroma_client,
-            collection_name='financial_reports',
-            embedding_function=self.embedding_function,
-        )
+
+class QueryEngine(metaclass=Singleton):
+
+    index = IndexBuilder()
+    chroma_client = index.create_embeddings()
+    embedding_function = OpenAIEmbeddings(model="text-embedding-ada-002")
+    print("ALL Embeeding added")
+    chroma_db = Chroma(
+        client=chroma_client,
+        collection_name='financial_reports',
+        embedding_function=embedding_function,
+    )
+
+        
 
     def prompt(self):
         template = """Use the following pieces of context to answer the question at the end.

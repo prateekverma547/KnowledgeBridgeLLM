@@ -6,7 +6,8 @@ from datasets import load_dataset
 
 class DataPreprocessor:
     def __init__(self):
-        self.data = load_dataset("JanosAudran/financial-reports-sec", "small_full", split="train")
+        print("data pro loaded")
+        self.data = load_dataset("JanosAudran/financial-reports-sec", "small_full", split="train",trust_remote_code=True)
         self.data = self.data.to_pandas()
 
     def parse_sentiment(self, label_dict):

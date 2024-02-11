@@ -1,6 +1,6 @@
 langchain
 langchain-openai
-streamlit
+streamlit == 1.24.0
 datasets
 chromadb
 python-dotenv
