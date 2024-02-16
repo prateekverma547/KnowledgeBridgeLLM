@@ -75,3 +75,7 @@ On the first run, the application will download data from Hugging Face (ARR CORP
 ---
 
 Ensure to replace placeholders like `your_env_name` and `your_openai_api_key_here` with your specific details. This guide is designed to help users through the setup process of the KnowledgeBridgeLLM project efficiently.
+
+# Evaluation of Model
+
+

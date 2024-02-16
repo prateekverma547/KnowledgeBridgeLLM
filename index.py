@@ -34,7 +34,6 @@ class IndexBuilder:
             length_function=len,
         )
         split_doc = text_splitter.split_documents(self.documents)
-        self.testclass.split_docs=split_doc.copy()
         return split_doc
 
     def create_embeddings(self):
