@@ -76,6 +76,26 @@ On the first run, the application will download data from Hugging Face (ARR CORP
 
 Ensure to replace placeholders like `your_env_name` and `your_openai_api_key_here` with your specific details. This guide is designed to help users through the setup process of the KnowledgeBridgeLLM project efficiently.
 
-# Evaluation of Model
+# Model Evaluation
 
+To evaluate the model's performance, you need to execute the `evaluation.py` script. Below are the detailed instructions:
+
+## Running the Evaluation Script
+
+1. **Execute the Script**: Navigate to the directory containing `evaluation.py` and run the script in your command line interface:
+    ```bash
+    python evaluation.py
+    ```
+
+2. **Understanding the Process**: For a visual representation of the evaluation process, refer to the flowchart available in the `flow_diagram` folder.
+
+3. **Test Outcome Data**: The repository includes a pre-compiled test outcome file named `testOutcome.csv`. This file contains the results of a previous evaluation run.
+
+4. **Generating New Tests**: If you wish to generate a new test file, simply remove or rename the existing `testOutcome.csv` file in the repository. Note that generating new tests consumes a significant number of tokens since it utilizes large language models (LLMs) for backend processing.
+
+## Note on Resource Consumption
+
+Please be aware that running new tests is resource-intensive and may take some time to complete due to the usage of backend LLMs. Plan your resource allocation accordingly.
+
+For any issues or further instructions, refer to the documentation or open an issue in the repository.
 
