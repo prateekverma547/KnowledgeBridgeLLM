@@ -22,7 +22,10 @@ st.markdown(
 
 # Initialize messages
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "You can ask me questions like:\n"}]
+    st.session_state.messages = [{"role": "assistant", "content": """You can ask me questions like:
+                                  \n* What services does the company provide?
+                                  \n* When was AAR founded?\nWhat percentage of sales did the Aviation Services segment account for in fiscal years 2019, 2018, and 2017?
+                                  \n* What are the primary methods of conducting business for AAR?"""}]
 
 # Display messages
 for message in st.session_state["messages"]:
