@@ -1,8 +1,62 @@
 
-
 # KnowledgeBridgeLLM
 
 This guide outlines the steps required to set up and run the KnowledgeBridgeLLM project. Follow the instructions carefully to ensure a smooth setup process.
+
+## Project Overview
+KnowledgeBridgeLLM is a project developed as part of the thesis "AUGMENTING INTELLIGENCE: BRIDGING LLMS WITH EXTERNAL KNOWLEDGE REPOSITORIES." It aims to demonstrate the practical application of integrating Large Language Models (LLMs) with real-time financial databases to enhance decision-making and data analysis capabilities. This repository contains all the code and setup instructions necessary to replicate the project and explore its functionalities.
+
+## Project Components Explanation
+
+The `KnowledgeBridgeLLM` project is structured into several core components, each fulfilling specific roles within the data processing, query handling, and model evaluation pipeline. Here is a detailed explanation of each component:
+
+### `data_preprocessing.py`: DataPreprocessor Class
+- **Purpose**: Manages initial data loading and formatting.
+- **Key Responsibilities**:
+  - Loads data directly from Hugging Face in the initialization (`__init__`) function.
+  - Processes data to ensure it is in the correct format for analysis and integration.
+
+### `index.py`: IndexBuilder Class
+- **Purpose**: Central to data indexing and embedding generation.
+- **Key Responsibilities**:
+  - Invokes `DataPreprocessor` for initial data preprocessing.
+  - Converts preprocessed data into a DataFrame for easier manipulation.
+  - Splits data into chunks for manageable processing and analysis.
+  - Generates data embeddings and manages the embedding database.
+  - Checks for existing embeddings in the vector database (chroma db) to either load them or create and save new embeddings as needed.
+
+### `query.py`: QueryEngine Class
+- **Purpose**: Handles processing and responding to user queries.
+- **Key Responsibilities**:
+  - Utilizes `IndexBuilder` for data indexing and access.
+  - Loads embeddings from the "financial_reports" collection in the vector database.
+  - Processes user queries by converting them to embeddings and fetching similar documents.
+  - Creates prompts for the LLM to summarize fetched documents, then sends summaries back to `chat_ui.py` for display.
+
+### `chat_ui.py`
+- **Purpose**: Provides the user interface for the application.
+- **Key Responsibilities**:
+  - Acts as the entry point, calling `QueryEngine` to process user queries.
+  - Uses Streamlit to create an interactive chat interface for input and display.
+  - Passes user queries to `QueryEngine` and displays responses, maintaining a query history.
+
+### `evaluation.py`
+- **Purpose**: Independently evaluates the model's performance.
+- **Key Responsibilities**:
+  - Operates separately from the main application, providing a means to test and validate the model.
+  - Loads and processes data, then selects chunks to create questions and answers.
+  - Uses the model to generate responses to the questions and compares these to the LLM-generated answers based on the data chunks.
+  - Produces results from the comparison, offering insights into model performance.
+
+**Visual Guides**:
+- For a comprehensive understanding of the interaction between these components, refer to the "RAG Architecture" flowchart in the flow diagram folder.
+- The evaluation process and its workflow can be better understood by examining "Evaluation-Flow.png," also located in the flow diagram folder.
+
+**TestOutcome**:
+- The repository includes a `TestOutcome.csv` file, which documents the outcomes of tests previously conducted. This file serves as a benchmark for evaluating the model's performance against established metrics.
+
+**Note**: Running the code requires an "OPENAI_API_KEY." Please ensure you have access to this key for testing purposes. If needed, contact the repository owner for access.
+
 
 ## Prerequisites
 
